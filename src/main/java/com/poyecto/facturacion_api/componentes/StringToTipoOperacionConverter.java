@@ -1,4 +1,4 @@
-package componentes;
+package com.poyecto.facturacion_api.componentes;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
