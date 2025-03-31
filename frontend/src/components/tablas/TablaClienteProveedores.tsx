@@ -1,6 +1,6 @@
 import React from 'react';
 import { useClientesProveedores } from '../../Queries/useClientesProveedores';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 const TablaClientesProveedores = () => {
   const { data: clientes, isLoading, error } = useClientesProveedores();
 
@@ -8,8 +8,8 @@ const TablaClientesProveedores = () => {
   if (error) return <span>Error: {error.message}</span>;
 
   return (
-    <table>
-      <thead>
+    <table className="table table-bordered table-dark " >
+      <thead className = "table-light">
         <tr>
           <th>Razon Social</th>
           <th>Tipo</th>

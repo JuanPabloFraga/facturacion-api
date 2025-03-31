@@ -9,7 +9,7 @@ const ClientesProveedoresPage = () => {
 
   const manejarClienteCreado = () => {
     setModalAbierto(false);
-    // Opcional: invalidar la query o refrescar los datos aquí
+    
   };
 
   return (
@@ -26,7 +26,8 @@ const ClientesProveedoresPage = () => {
         onClose={() => setModalAbierto(false)}
         onClienteCreado={manejarClienteCreado}
       />
-
+      <p>
+        </p>
       <TablaClientesProveedores />
     </div>
   );

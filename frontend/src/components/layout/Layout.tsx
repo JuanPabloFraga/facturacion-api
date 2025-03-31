@@ -6,9 +6,9 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
-  <div className="layout" style={{ display: 'flex' }}>
-    <Sidebar />
-    <main style={{ padding: '20px', width: '100%' }}>
+  <div className="app-layout" style={{ display: 'flex' }}>
+    <Sidebar  />
+    <main className="app-main-content">
       {children}
     </main>
   </div>
