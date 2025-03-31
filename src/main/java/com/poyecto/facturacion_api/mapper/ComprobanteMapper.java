@@ -41,6 +41,7 @@ public interface ComprobanteMapper {
     @Mapping(target = "clienteProveedor", source = "clienteProveedor.id")
     @Mapping(target = "tipoComprobante", ignore = true)
     @Mapping(target = "montoTotal", source = "montoTotal")
+    @Mapping(target = "subtotal", source = "subtotal")
     FacturaResponseDTO facturaToFacturaResponseDTO(Factura factura);
     
 

@@ -76,6 +76,8 @@ public class FacturaService {
             BigDecimal montoTotal = BigDecimal.ZERO;
             BigDecimal montoIva = BigDecimal.ZERO;
             BigDecimal alicuota = BigDecimal.ZERO;
+            BigDecimal montoSubtotal = BigDecimal.ZERO;
+
             for (CreateDetalleComprobanteDTO detalleDTO : createFacturaDTO.getDetalles()) {
                 
                 DetalleComprobante detalle = comprobanteMapper.createDetalleComprobanteDTOToDetalleComprobante(detalleDTO);
@@ -92,6 +94,7 @@ public class FacturaService {
                 detalles.add(detalle);
                
                 montoIva = montoIva.add(iva);
+                montoSubtotal = montoSubtotal.add(subtotal);
                 montoTotal = montoTotal.add(subtotal).add(montoIva);
             }
             

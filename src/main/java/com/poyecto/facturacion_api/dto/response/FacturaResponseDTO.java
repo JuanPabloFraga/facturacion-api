@@ -14,5 +14,6 @@ import lombok.experimental.SuperBuilder;
 public class FacturaResponseDTO extends ComprobanteResponseDTO {
     private String letraFactura;
     private Integer puntoVenta;
+    
 
 }

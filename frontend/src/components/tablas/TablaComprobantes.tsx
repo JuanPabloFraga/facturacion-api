@@ -65,6 +65,7 @@ const TablaComprobantes: React.FC = () => {
             <th>Número</th>
             <th>Cliente/Proveedor</th>
             <th>IVA</th>
+            <th>Subtotal</th>
             <th>Total</th>
           </tr>
         </thead>
@@ -78,6 +79,7 @@ const TablaComprobantes: React.FC = () => {
                 <td>{comp.numero}</td>
                 <td>{comp.clienteProveedor}</td>
                 <td>{comp.montoIva}</td>
+                <td>{comp.subtotal}</td>
                 <td>{comp.montoTotal}</td>
               </tr>
             ))

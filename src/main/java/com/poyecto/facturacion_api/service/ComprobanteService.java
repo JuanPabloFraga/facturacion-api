@@ -20,13 +20,15 @@ public class ComprobanteService {
     private final ComprobanteMapper comprobanteMapper;
 
 
-    public ComprobanteService(ComprobanteRepository comprobanteRepository, com.poyecto.facturacion_api.mapper.ComprobanteMapper comprobanteMapper, ComprobanteMapper comprobanteMapper1) {
+    public ComprobanteService(ComprobanteRepository comprobanteRepository, ComprobanteMapper comprobanteMapper) {
         this.comprobanteRepository = comprobanteRepository;
-        this.comprobanteMapper = comprobanteMapper1;
+        this.comprobanteMapper = comprobanteMapper;
 
     }
 
-public List<ComprobanteResponseDTO> obtenerComprobantesFiltrados(TipoOperacion tipoOperacion, String tipoComprobante, LocalDate fechaDesde, LocalDate fechaHasta) {
+
+
+    public List<ComprobanteResponseDTO> obtenerComprobantesFiltrados(TipoOperacion tipoOperacion, String tipoComprobante, LocalDate fechaDesde, LocalDate fechaHasta) {
         return comprobanteRepository.obtenerComprobantesFiltrados(tipoOperacion, tipoComprobante).stream()
                 .filter(comprobante -> comprobante.getFecha() != null &&
                         (fechaDesde == null || !comprobante.getFecha().isBefore(fechaDesde)) &&
@@ -41,6 +43,7 @@ public List<ComprobanteResponseDTO> obtenerComprobantesFiltrados(TipoOperacion t
         if (comprobante instanceof Factura factura) {
             dto = comprobanteMapper.facturaToFacturaResponseDTO(factura);
             dto.setTipoComprobante("FAC");
+            dto.setSubtotal(factura.getMontoTotal().subtract(factura.getMontoIva()));
 
         } else if (comprobante instanceof NotaCredito notaCredito) {
 

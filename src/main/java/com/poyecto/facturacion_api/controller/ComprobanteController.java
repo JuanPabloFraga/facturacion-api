@@ -7,10 +7,13 @@ import com.poyecto.facturacion_api.dto.response.ComprobanteResponseDTO;
 import com.poyecto.facturacion_api.dto.response.FacturaResponseDTO;
 import com.poyecto.facturacion_api.dto.response.NotaCreditoResponseDTO;
 import com.poyecto.facturacion_api.dto.response.NotaDebitoResponseDTO;
+import com.poyecto.facturacion_api.mapper.ComprobanteMapper;
 import com.poyecto.facturacion_api.model.Factura;
 import com.poyecto.facturacion_api.model.NotaCredito;
 import com.poyecto.facturacion_api.model.NotaDebito;
 import com.poyecto.facturacion_api.model.TipoOperacion;
+import com.poyecto.facturacion_api.repository.ComprobanteRepository;
+import com.poyecto.facturacion_api.repository.FacturaRepository;
 import com.poyecto.facturacion_api.service.ComprobanteService;
 import com.poyecto.facturacion_api.service.FacturaService;
 import com.poyecto.facturacion_api.service.NotaCreditoService;
@@ -30,7 +33,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/comprobantes")
 public class ComprobanteController {
+@Autowired
+private FacturaRepository facturaRepository;
 
+@Autowired
+private ComprobanteMapper comprobanteMapper;
     @Autowired
     private FacturaService facturaService;
     
@@ -64,6 +71,24 @@ public class ComprobanteController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PutMapping("/facturas/{id}")
+    public ResponseEntity<FacturaResponseDTO> actualizarFactura(@Valid @RequestBody Factura factura, @PathVariable Long id ) {
+          Factura modificar = facturaRepository.findById(id).get();
+
+          modificar.setSubtotal(factura.getMontoTotal().subtract(factura.getMontoIva()));
+
+
+
+
+
+
+        facturaRepository.save(factura);
+
+        return ResponseEntity.ok(comprobanteMapper.facturaToFacturaResponseDTO(factura));
+
+
     }
     
     // Endpoints para Notas de Crédito
@@ -125,4 +150,7 @@ public class ComprobanteController {
         List<ComprobanteResponseDTO> comprobantes = comprobanteService.obtenerComprobantesFiltrados(tipoOperacion, tipoComprobante,fechadesde,fechaHasta);
         return ResponseEntity.ok(comprobantes);
     }
+
+
+
 }

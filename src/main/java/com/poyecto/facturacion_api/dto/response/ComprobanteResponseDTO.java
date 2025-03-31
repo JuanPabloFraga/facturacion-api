@@ -24,5 +24,7 @@ public abstract class ComprobanteResponseDTO {
     private Long clienteProveedor;
     private List<DetalleComprobanteResponseDTO> detalles;
     private String tipoComprobante;
+    private BigDecimal subtotal;
+
     
 }
